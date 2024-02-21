@@ -35,13 +35,13 @@ struct Config: ParsableCommand {
     var options: StageOptions
 
     @Option(help: "The base directory where the working directory of the job will be created in the VMware Fusion guest.")
-    var buildsDir = Path.root.join("Users").join("buildbot").join("builds")
+    var buildsDir = Path.root.join("Users").join("gitlab-runner").join("builds")
         .join("runner-\(ciRunnerId)")
         .join("concurrent-\(ciConcurrentProjectId)")
         .join(ciProjectPath)
 
     @Option(help: "The base directory where local cache will be stored in the VMware Fusion guest.")
-    var cacheDir = Path.root.join("Users").join("buildbot").join("cache")
+    var cacheDir = Path.root.join("Users").join("gitlab-runner").join("cache")
         .join("runner-\(ciRunnerId)")
         .join("concurrent-\(ciConcurrentProjectId)")
         .join(ciProjectPath)

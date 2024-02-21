@@ -131,6 +131,7 @@ struct Prepare: ParsableCommand {
         try clone.start(hasGUI: isGUI)
 
         FileHandle.standardOutput.write(line: "Waiting for guest \"\(clonedGuestName)\" to become responsive...")
+        sleep(30)
         guard let ip = clone.ip else {
             os_log("VMware Guest never resolved an IP address.", log: log, type: .error)
             throw ExitCode(GitlabRunnerError.systemFailure)
@@ -142,7 +143,7 @@ struct Prepare: ParsableCommand {
             let session = try Session(host: ip, username: sshOptions.sshUsername)
             try session.authenticate(withIdentity: sshOptions.sshIdentityFile)
             let channel = try session.openChannel()
-            let exitCode = channel.execute("echo -n 2>&1")
+            let exitCode = channel.execute("date")
 
             if exitCode == 0 {
                 return
